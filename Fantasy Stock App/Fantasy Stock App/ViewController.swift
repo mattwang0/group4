@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MongoKitten
 
 class ViewController: UIViewController {
 
@@ -15,6 +16,17 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 
+    print("Testing MongoKitten")
+    
+    let server = try Server("mongodb://localhost")
+    let database = server["mydatabasename"]
+    let database = try Database("mongodb://localhost/mydatabasename")
+    
+    if database.server.isConnected {
+        print("Successfully connected!")
+    } else {
+        print("Connection failed")
+    }
 
 }
 
