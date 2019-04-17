@@ -14,6 +14,7 @@
 		C927131F225BE7D70011C368 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C927131D225BE7D70011C368 /* LaunchScreen.storyboard */; };
 		C927132A225BE7D70011C368 /* Fantasy_Stock_AppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9271329225BE7D70011C368 /* Fantasy_Stock_AppTests.swift */; };
 		C9271335225BE7D70011C368 /* Fantasy_Stock_AppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9271334225BE7D70011C368 /* Fantasy_Stock_AppUITests.swift */; };
+		C932C5152267922500CAA480 /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C932C5142267922500CAA480 /* CreateAccountViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		C9271330225BE7D70011C368 /* Fantasy Stock AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Fantasy Stock AppUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9271334225BE7D70011C368 /* Fantasy_Stock_AppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fantasy_Stock_AppUITests.swift; sourceTree = "<group>"; };
 		C9271336225BE7D70011C368 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C932C5142267922500CAA480 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +79,7 @@
 		C9271308225BE7D40011C368 = {
 			isa = PBXGroup;
 			children = (
+				C932C5142267922500CAA480 /* CreateAccountViewController.swift */,
 				C9271313225BE7D50011C368 /* Fantasy Stock App */,
 				C9271328225BE7D70011C368 /* Fantasy Stock AppTests */,
 				C9271333225BE7D70011C368 /* Fantasy Stock AppUITests */,
@@ -256,6 +259,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C932C5152267922500CAA480 /* CreateAccountViewController.swift in Sources */,
 				C9271317225BE7D50011C368 /* ViewController.swift in Sources */,
 				C9271315225BE7D50011C368 /* AppDelegate.swift in Sources */,
 			);
