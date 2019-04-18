@@ -25,6 +25,14 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rjS-rN-i8G">
+                                <rect key="frame" x="163" y="309" width="48" height="95"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Logout"/>
+                                <connections>
+                                    <action selector="loginButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="UXs-X7-Yv8"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.89166931705004804" green="1" blue="0.91714930365039127" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -38,10 +46,10 @@
             </objects>
             <point key="canvasLocation" x="860" y="132.68365817091455"/>
         </scene>
-        <!--View Controller-->
+        <!--Login View Controller-->
         <scene sceneID="2DS-YB-HBw">
             <objects>
-                <viewController id="61Q-fe-XYb" sceneMemberID="viewController">
+                <viewController id="61Q-fe-XYb" customClass="LoginViewController" customModule="Fantasy_Stock_App" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="llA-sJ-CHL">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -66,6 +74,9 @@
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Login"/>
+                                <connections>
+                                    <action selector="loginButtonPressed:" destination="61Q-fe-XYb" eventType="touchUpInside" id="ktF-rd-ReW"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Or" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IjG-me-MIp">
                                 <rect key="frame" x="178" y="258" width="19" height="21"/>
@@ -88,6 +99,10 @@
                         <color key="backgroundColor" red="0.89049381017684937" green="0.99736136198043823" blue="0.91763824224472046" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <viewLayoutGuide key="safeArea" id="lfA-hQ-fOR"/>
                     </view>
+                    <connections>
+                        <outlet property="userEmailTextField" destination="Ygf-uv-0AG" id="lcK-yy-ShO"/>
+                        <outlet property="userPasswordTextField" destination="p2x-r4-f2Y" id="U6f-Ac-04f"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZDw-Fi-H1R" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -183,6 +198,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="wyP-Wa-D9G"/>
+        <segue reference="Nyq-c1-byr"/>
     </inferredMetricsTieBreakers>
 </document>

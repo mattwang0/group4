@@ -25,33 +25,36 @@ class CreateAccountViewController: UIViewController {
         let userPassword = userPasswordTextField.text;
         let userPassword2 = userRepeatPasswordTextField.text;
         
-        print(userEmail);
-        print(userPassword);
         
         // check for empty fields
         if (userEmail?.isEmpty ?? true || userPassword?.isEmpty ?? true || userPassword2?.isEmpty ?? true) {
-            displayAlertMessage(userMessage: "Please fill out all required fields.");
+            displayAlertMessage(userMessage: "Please fill out all required fields");
             
             return;
         }
         
-        // check if passwords match
+        // send alert if passwords don't match
+        if (userPassword != userPassword2) {
+            displayAlertMessage(userMessage: "Passwords don't match");
+            
+            return;
+        }
         
-        // store data
+        // store data --> FIGURE OUT THE DATABASE
+        
         
         // display confirmation message
-        
+        displayAlertMessage(userMessage: "Registration successful!")
         
     }
     
     func displayAlertMessage(userMessage:String) {
         var myAlert = UIAlertController(title:"Alert", message:userMessage, preferredStyle: .alert);
-//        var myAlert = UIAlertController(title:"Alert", message:userMessage, preferredStyle: UIAlertAction.Style);
 
         let okAction = UIAlertAction(title:"Ok", style: UIAlertAction.Style.default, handler:nil);
-        
+
         myAlert.addAction(okAction);
-        
+
         self.present(myAlert, animated: true);
     }
     

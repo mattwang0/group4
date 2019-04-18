@@ -17,8 +17,25 @@ class ViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        
         self.performSegue(withIdentifier: "loginView", sender: self);
+        
+//        let isLoggedIn = UserDefaults.standard.bool(forKey: "userLoggedIn");
+//
+//        if (!isLoggedIn) {
+//            self.performSegue(withIdentifier: "loginView", sender: self);
+//        }
     }
+    
+//    @IBAction func logoutButtonClicked(_ sender: Any) {
+//        UserDefaults.standard.set(false, forKey: "userLoggedIn");
+//        UserDefaults.standard.synchronize();
+//
+//        self.performSegue(withIdentifier: "loginView", sender: self);
+//    }
+//
+    
+    // TRYING TO FIGURE OUT DATABASE CONNECTION:
 
 //    print("Testing MongoKitten")
     
