@@ -7,13 +7,24 @@
 //
 
 import UIKit
+import SQLite
 
 class CreateAccountViewController: UIViewController {
     
     @IBOutlet weak var userEmailTextField: UITextField!
     @IBOutlet weak var userPasswordTextField: UITextField!
     @IBOutlet weak var userRepeatPasswordTextField: UITextField!
-
+    
+    // DATABASE INITIALIZATION STUFF
+    let db = try Connection("Users/matt/test.db")
+    
+    let people = Table("People")
+    
+    for person in try db.prepare(people) {
+        print("id: \(user[id]), name: \(user[name])")
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -43,13 +54,14 @@ class CreateAccountViewController: UIViewController {
         // store data --> FIGURE OUT THE DATABASE
         
         
+        
         // display confirmation message
         displayAlertMessage(userMessage: "Registration successful!")
         
     }
     
     func displayAlertMessage(userMessage:String) {
-        var myAlert = UIAlertController(title:"Alert", message:userMessage, preferredStyle: .alert);
+        let myAlert = UIAlertController(title:"Alert", message:userMessage, preferredStyle: .alert);
 
         let okAction = UIAlertAction(title:"Ok", style: UIAlertAction.Style.default, handler:nil);
 
