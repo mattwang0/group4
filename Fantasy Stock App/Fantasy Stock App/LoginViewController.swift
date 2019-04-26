@@ -41,12 +41,6 @@ class LoginViewController: UIViewController {
         
         var correctPassword = "";
         
-        
-        // IF PASSWORDS MATCH:
-            // LOGIN SUCCESSFUL
-        // ELSE:
-            // ERROR MESSAGE
-        
         // get correct password based on userEmail
         let query = userTable.select(password).filter(userEmail == email);
         do {
@@ -63,28 +57,17 @@ class LoginViewController: UIViewController {
         // see if passwords match
         if (correctPassword == userPassword) {
             print("PASSWORD IS CORRECT")
+            UserDefaults.standard.set(true, forKey: "userLoggedIn");
+            UserDefaults.standard.synchronize();
+            self.dismiss(animated: true, completion: nil)
         }
         else {
             displayAlertMessage(userMessage: "Email/password invaild");
         }
-        
-        
-        // PLACEHOLDER CODE
-//        if (userPassword == "password") {
-//            UserDefaults.standard.set(true, forKey: "userLoggedIn");
-//
-//            UserDefaults.standard.synchronize();
-//
-//            self.dismiss(animated: true, completion: nil);
-//        }
-//        else {
-//            displayAlertMessage(userMessage: "Email/password invaild");
-//        }
-        
     }
     
     func displayAlertMessage(userMessage:String) {
-        var myAlert = UIAlertController(title:"Alert", message:userMessage, preferredStyle: .alert);
+        let myAlert = UIAlertController(title:"Alert", message:userMessage, preferredStyle: .alert);
         
         let okAction = UIAlertAction(title:"Ok", style: UIAlertAction.Style.default, handler:nil);
         

@@ -16,38 +16,24 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    @IBAction func logoutButtonClicked(_ sender: Any) {
+        UserDefaults.standard.set(false, forKey: "userLoggedIn");
+        UserDefaults.standard.synchronize();
         
         self.performSegue(withIdentifier: "loginView", sender: self);
-        
-//        let isLoggedIn = UserDefaults.standard.bool(forKey: "userLoggedIn");
-//
-//        if (!isLoggedIn) {
-//            self.performSegue(withIdentifier: "loginView", sender: self);
-//        }
     }
     
-//    @IBAction func logoutButtonClicked(_ sender: Any) {
-//        UserDefaults.standard.set(false, forKey: "userLoggedIn");
-//        UserDefaults.standard.synchronize();
-//
-//        self.performSegue(withIdentifier: "loginView", sender: self);
-//    }
-//
-    
-    // TRYING TO FIGURE OUT DATABASE CONNECTION:
+    override func viewDidAppear(_ animated: Bool) {
+        
+        // TESTING
+        UserDefaults.standard.set(false, forKey: "userLoggedIn");
+        UserDefaults.standard.synchronize();
+        
+        
+        let isLoggedIn = UserDefaults.standard.bool(forKey: "userLoggedIn");
 
-//    print("Testing MongoKitten")
-    
-//    let server = try Server("mongodb://localhost")
-//    let database = server["mydatabasename"]
-//    let database = try Database("mongodb://localhost/mydatabasename")
-//
-//    if database.server.isConnected {
-//        print("Successfully connected!")
-//    } else {
-//        print("Connection failed")
-//    }
-
+        if (isLoggedIn == false) {
+            self.performSegue(withIdentifier: "loginView", sender: self);
+        }
+    }
 }
-
