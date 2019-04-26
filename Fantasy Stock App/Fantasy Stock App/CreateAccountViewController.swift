@@ -73,7 +73,7 @@ class CreateAccountViewController: UIViewController {
             let createUserTable = self.userTable.create {
                 (table) in
                 table.column(self.userId, primaryKey: true)
-                table.column(self.email)
+                table.column(self.email, unique: true)
                 table.column(self.password)
             }
             do {
@@ -88,12 +88,16 @@ class CreateAccountViewController: UIViewController {
             // database: add new user
             let insertUser = self.userTable.insert(self.email <- userEmail, self.password <- userPassword)
             do {
+                
+                // TODO ONLY INSERT USER IF USER NOT ALREADY IN DATABASE; IF YES, NOTIFY
+                
                 try self.database.run(insertUser)
                 print("User inserted!")
             }
             catch {
                 print(error)
             }
+            
             
             // TESTING: print users in database
             do {
@@ -121,15 +125,5 @@ class CreateAccountViewController: UIViewController {
 
         self.present(myAlert, animated: true);
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

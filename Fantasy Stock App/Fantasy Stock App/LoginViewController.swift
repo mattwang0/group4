@@ -35,6 +35,14 @@ class LoginViewController: UIViewController {
         }
     }
     
+//    override func viewDidAppear(_ animated: Bool) {
+//        let isLoggedIn = UserDefaults.standard.bool(forKey: "userLoggedIn");
+//
+//        if (isLoggedIn == false) {
+//            self.performSegue(withIdentifier: "LoginViewController", sender: self);
+//        }
+//    }
+    
     @IBAction func loginButtonPressed(_ sender: Any) {
         let userEmail = userEmailTextField.text!;
         let userPassword = userPasswordTextField.text!;

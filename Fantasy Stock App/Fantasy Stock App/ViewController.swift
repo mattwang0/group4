@@ -7,7 +7,6 @@
 //
 
 import UIKit
-//import MongoKitten
 
 class ViewController: UIViewController {
 
@@ -16,24 +15,24 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    @IBAction func logoutButtonClicked(_ sender: Any) {
-        UserDefaults.standard.set(false, forKey: "userLoggedIn");
-        UserDefaults.standard.synchronize();
-        
-        self.performSegue(withIdentifier: "loginView", sender: self);
-    }
-    
     override func viewDidAppear(_ animated: Bool) {
         
         // TESTING
-        UserDefaults.standard.set(false, forKey: "userLoggedIn");
+//        UserDefaults.standard.set(false, forKey: "userLoggedIn");
+//        UserDefaults.standard.synchronize();
+        
         UserDefaults.standard.synchronize();
-        
-        
         let isLoggedIn = UserDefaults.standard.bool(forKey: "userLoggedIn");
 
         if (isLoggedIn == false) {
             self.performSegue(withIdentifier: "loginView", sender: self);
         }
+    }
+    
+    @IBAction func logoutButtonTapped(_ sender: Any) {
+        UserDefaults.standard.set(false, forKey: "userLoggedIn");
+        UserDefaults.standard.synchronize();
+
+        self.performSegue(withIdentifier: "loginView", sender: self);
     }
 }
