@@ -7,40 +7,79 @@
 //
 
 import UIKit
+import SQLite
 
 class LoginViewController: UIViewController {
 
     @IBOutlet weak var userEmailTextField: UITextField!
     @IBOutlet weak var userPasswordTextField: UITextField!
     
+    var db : Connection!
+    
+    let userTable = Table("users")
+    let email = Expression<String>("email")
+    let password = Expression<String>("password")
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        // DATABASE INITIALIZATION
+        do {
+            let documentDirectory = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+            let fileUrl = documentDirectory.appendingPathExtension("users").appendingPathExtension("sqlite3")
+            let database = try Connection(fileUrl.path)
+            self.db = database
+        }
+        catch {
+            print(error)
+        }
     }
     
     @IBAction func loginButtonPressed(_ sender: Any) {
-        let userEmail = userEmailTextField.text;
-        let userPassword = userPasswordTextField.text;
+        let userEmail = userEmailTextField.text!;
+        let userPassword = userPasswordTextField.text!;
         
-        // QUERY DATABASE TO GET PASSWORD BASED ON USEREMAIL
+        var correctPassword = "";
+        
         
         // IF PASSWORDS MATCH:
             // LOGIN SUCCESSFUL
         // ELSE:
             // ERROR MESSAGE
         
-        // PLACEHOLDER CODE
-        if (userPassword == "password") {
-            UserDefaults.standard.set(true, forKey: "userLoggedIn");
-
-            UserDefaults.standard.synchronize();
-
-            self.dismiss(animated: true, completion: nil);
+        // get correct password based on userEmail
+        let query = userTable.select(password).filter(userEmail == email);
+        do {
+            for row in try self.db.prepare(query) {
+                correctPassword = row[password]
+            }
+        }
+        catch {
+            print(error)
+        }
+        
+        print("CORRECT PASS: " + correctPassword)
+        
+        // see if passwords match
+        if (correctPassword == userPassword) {
+            print("PASSWORD IS CORRECT")
         }
         else {
             displayAlertMessage(userMessage: "Email/password invaild");
         }
+        
+        
+        // PLACEHOLDER CODE
+//        if (userPassword == "password") {
+//            UserDefaults.standard.set(true, forKey: "userLoggedIn");
+//
+//            UserDefaults.standard.synchronize();
+//
+//            self.dismiss(animated: true, completion: nil);
+//        }
+//        else {
+//            displayAlertMessage(userMessage: "Email/password invaild");
+//        }
         
     }
     
