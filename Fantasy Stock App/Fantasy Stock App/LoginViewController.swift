@@ -63,11 +63,12 @@ class LoginViewController: UIViewController {
         print("CORRECT PASS: " + correctPassword)
         
         // see if passwords match
-        if (correctPassword == userPassword) {
+        if (correctPassword == userPassword && userPassword != "") {
             print("PASSWORD IS CORRECT")
             UserDefaults.standard.set(true, forKey: "userLoggedIn");
             UserDefaults.standard.synchronize();
-            self.dismiss(animated: true, completion: nil)
+//            self.dismiss(animated: true, completion: nil) // TODO this still sends you to create account page if you just created account
+            self.performSegue(withIdentifier: "loginToMainSegue", sender: nil);
         }
         else {
             displayAlertMessage(userMessage: "Email/password invaild");
