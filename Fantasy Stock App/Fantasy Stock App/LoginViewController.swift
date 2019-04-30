@@ -19,6 +19,7 @@ class LoginViewController: UIViewController {
     let userTable = Table("users")
     let email = Expression<String>("email")
     let password = Expression<String>("password")
+    let userId = Expression<String>("id")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,19 +36,13 @@ class LoginViewController: UIViewController {
         }
     }
     
-//    override func viewDidAppear(_ animated: Bool) {
-//        let isLoggedIn = UserDefaults.standard.bool(forKey: "userLoggedIn");
-//
-//        if (isLoggedIn == false) {
-//            self.performSegue(withIdentifier: "LoginViewController", sender: self);
-//        }
-//    }
     
     @IBAction func loginButtonPressed(_ sender: Any) {
         let userEmail = userEmailTextField.text!;
         let userPassword = userPasswordTextField.text!;
         
         var correctPassword = "";
+        var currentUserEmail = ""
         
         // get correct password based on userEmail
         let query = userTable.select(password).filter(userEmail == email);
@@ -62,12 +57,22 @@ class LoginViewController: UIViewController {
         
         print("CORRECT PASS: " + correctPassword)
         
-        // see if passwords match
+        // see if passwords match #111
         if (correctPassword == userPassword && userPassword != "") {
             print("PASSWORD IS CORRECT")
             UserDefaults.standard.set(true, forKey: "userLoggedIn");
+            
+            // query userEmail and save to UserDefaults
+            let query = userTable.filter(userEmail==email);
+            do {
+                for row in try self.db.prepare(query) {
+                    currentUserEmail = row[email]
+                }
+            } catch {print(error)}
+            print("currentUserId: \(currentUserEmail)");
+            UserDefaults.standard.set(currentUserEmail, forKey: "userEmail");
+            
             UserDefaults.standard.synchronize();
-//            self.dismiss(animated: true, completion: nil) // TODO this still sends you to create account page if you just created account
             self.performSegue(withIdentifier: "loginToMainSegue", sender: nil);
         }
         else {
