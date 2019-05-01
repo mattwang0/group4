@@ -15,10 +15,12 @@
     $data = file_get_contents($url);
     $data = substr($data,65);
     $startmark = strpos($data, "open");
-    $endmark = strpos($data, '", "');
-    echo $endmark;
-    $currentPrice = substr($data,$startmark+8,8);
-    echo $currentPrice;
+    $currentPrice = substr($data,$startmark+8,9);
+    $currentPrice = preg_replace('/[^0-9.]/', '', $currentPrice);
+
+
+    // echo $currentPrice;
+    // echo "<br>";
     // echo $data;
 
     $row = explode("\n",$data);
@@ -26,6 +28,30 @@
 
     
   ?>
+
+  <p>Price: $<?php echo $currentPrice?></p>
+
+
+  <?php
+  $servername = "localhost";
+  $username = "root";
+  $password = "123456";
+  $dbname = "stockSchema";
+
+  $conn = new mysqli($servername, $username, $password);
+
+  mysqli_select_db($conn, $dbname) or die("Could not open the '$dbname'");
+  ?>
+
+
+  <div class="form-group">
+    <form action="" method="post">
+      <input type="submit" class="btn btn-primary" value="Add to portfolio">
+    </form>
+    <form action="/welcome.php" method="post">
+      <input type="submit" class="btn btn-primary" value="Go back">
+    </form>
+  </div>
 
   <script>
     var request = new XMLHttpRequest();
