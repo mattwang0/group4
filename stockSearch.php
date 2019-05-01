@@ -13,7 +13,13 @@
   
 
     $data = file_get_contents($url);
-    echo $data;
+    $data = substr($data,65);
+    $startmark = strpos($data, "open");
+    $endmark = strpos($data, '", "');
+    echo $endmark;
+    $currentPrice = substr($data,$startmark+8,8);
+    echo $currentPrice;
+    // echo $data;
 
     $row = explode("\n",$data);
     $day = explode(",",$row[1]);
