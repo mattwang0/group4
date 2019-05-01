@@ -78,7 +78,7 @@ class CreateAccountViewController: UIViewController {
             }
             do {
                 try self.database.run(createUserTable)
-                print("User table created")
+                print("USER TABLE CREATED")
             }
             catch {
                 print(error)

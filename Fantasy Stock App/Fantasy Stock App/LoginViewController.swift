@@ -69,7 +69,7 @@ class LoginViewController: UIViewController {
                     currentUserEmail = row[email]
                 }
             } catch {print(error)}
-            print("currentUserId: \(currentUserEmail)");
+            print("currentUserEmail: \(currentUserEmail)");
             UserDefaults.standard.set(currentUserEmail, forKey: "userEmail");
             
             UserDefaults.standard.synchronize();

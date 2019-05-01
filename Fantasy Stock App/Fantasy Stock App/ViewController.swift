@@ -15,10 +15,11 @@ class ViewController: UIViewController {
     
     let userTable = Table("users")
     let inLeagueTable = Table("inLeague")
-    let email = Expression<Int>("userEmail")
+    let email = Expression<String>("userEmail")
     let leagueId = Expression<Int>("leagueId")
     
     var userEmail = "";
+    var currentLeagueId = -1;
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,9 +36,38 @@ class ViewController: UIViewController {
             print(error)
         }
         
+        // database: create inLeague table
+        let createInLeagueTable = self.inLeagueTable.create {
+            (table) in
+            table.column(self.email, primaryKey: true)
+            table.column(self.leagueId, unique: false)
+        }
+        do {
+            try self.db.run(createInLeagueTable)
+            print("INLEAGUE TABLE CREATED")
+        }
+        catch {
+            print(error)
+        }
+        
+        
+        // TESTING database: add mawang@davidson.edu to league table with leagueId 1
+        let insertTuple = self.inLeagueTable.insert(self.email <- "mawang@davidson.edu", self.leagueId <- 336)
+        do {
+            
+            // TODO ONLY INSERT USER IF USER NOT ALREADY IN DATABASE; IF YES, NOTIFY
+            
+            try self.db.run(insertTuple)
+            print("TEST tuple inserted!")
+        }
+        catch {
+            print(error)
+        }
+        
+        
         // TESTING delete inLeagueTable
 //        do {
-//            try database.run(inLeagueTable.drop(ifExists: true))
+//            try db.run(inLeagueTable.drop(ifExists: true))
 //        }
 //        catch {
 //            print(error)
@@ -51,13 +81,16 @@ class ViewController: UIViewController {
         userEmail =  UserDefaults.standard.string(forKey: "userEmail") ?? "empty"
         // query inLeague on userEmail
         let query = inLeagueTable.filter(userEmail == email);
+        print("userEmail from UserDefaults: \(userEmail)")
         do {
             for row in try self.db.prepare(query) {
-                currentUserEmail = row[email]
+                currentLeagueId = row[leagueId]
             }
         } catch {print(error)}
-//        let query = inLeague.select(password).filter(userEmail == email);
-        // if nothing comes up (if count of query is 0 or something), segue
+        print("currentLeagueId from query: \(currentLeagueId)")
+        
+        // if currentLeagueId = -1 then not in league already
+        // --> send to create or join league page
     }
     
     override func viewDidAppear(_ animated: Bool) {
