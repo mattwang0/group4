@@ -28,9 +28,9 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
         <a href="logout.php" class="btn btn-danger">Sign Out of Your Account</a>
     </p>
     <form action="/stockSearch.php" method="GET">
+    <br><br>
       <fieldset>
-        <legend>Search For a Stock</legend>
-        Stock Ticker:<br>
+        Search stock by ticker:<br>
         <input type="text" name="ticker" id = "ticker">
         <br>
         <input type="submit" value="Submit">
@@ -45,8 +45,10 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     </style>
     </head>
     
+    <br>
+    <br>
     <table align="center">
-      <caption><?php echo $_SESSION["username"];?> Portfolio</caption>
+      <caption><?php echo $_SESSION["username"];?>'s Portfolio:</caption>
       <tr>
         <th>Stock</th>
         <th>Purchase Price</th>
@@ -60,7 +62,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
         <?php
             $servername = "localhost";
             $username = "root";
-            $password = "PKswims83";
+            $password = "123456";
             $dbname = "stockSchema";
 
             mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
@@ -85,5 +87,18 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 
         ?>
     </table>
+
+    <br>
+    <br>
+
+    <form action="/dropStock.php" method="GET">
+      <fieldset>
+        Drop a stock:<br>
+        <input type="text" name="dropTicker" id = "dropTicker">
+        <br>
+        <input type="submit" value="Submit">
+      </fieldset>
+    </form>
+
 </body>
 </html>
