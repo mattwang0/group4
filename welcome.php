@@ -52,14 +52,18 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
       <tr>
         <th>Stock</th>
         <th>Purchase Price</th>
-        <!--<th>Current Price</th>
-        <th>Margin</th>-->
+        <th>Current Price</th>
+        <th>Margin</th>
       </tr>
       <tr>
 
 
 
         <?php
+
+            $urlFirst = 'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=';
+            $urlSecond = '&interval=5min&outputsize=full&apikey=E1TND8XYQA8S7DLQ';
+
             $servername = "localhost";
             $username = "root";
             $password = "123456";
@@ -76,17 +80,50 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
             $query = "SELECT * FROM owns WHERE username = '$user'";
             $result = mysqli_query($conn, $query);
 
+            $marginSum = 0;
+            $marginCount = 0;
 
             while($row = mysqli_fetch_array($result)) {
+                $ticker = $row[1];
+                $boughtPrice = $row[2];
+
+                $url = $urlFirst . $ticker . $urlSecond;
+                // echo "$url<br>";
+
+                $data = file_get_contents($url);
+                $data = substr($data,65);
+                $startmark = strpos($data, "open");
+                $currentPrice = substr($data,$startmark+8,9);
+                $currentPrice = preg_replace('/[^0-9.]/', '', $currentPrice);
+
+                // echo "$ticker $currentPrice<br>";
+                if (!is_numeric($currentPrice)) {
+                  $currentPrice = "API error";
+                  $margin = "API error";
+                }
+                else {
+                  $marginCount = $marginCount + 1;
+                  $margin = ((($currentPrice - $boughtPrice) / $boughtPrice) * 100.0);
+                  $marginSum = $marginSum + $margin;
+                }
+                
+
                 echo 
                     "<tr>
-                        <td> $row[1]</td><td> $row[2]</td>
+                        <td>$row[1]</td>
+                        <td>$row[2]</td>
+                        <td>$currentPrice</td>
+                        <td>$margin</td>
                     </tr>";
-
             }
 
         ?>
     </table>
+
+    <br>
+    <br>
+
+    <p>Total Margin: <?php echo $marginSum/$marginCount?></p>
 
     <br>
     <br>
