@@ -1,6 +1,3 @@
-# group4
-csc-312 software design spring 2019 fantasy stock app
+# Group4's Fantasy Stock [Web]app
 
-Test
-
-Test 2
+Our app runs on a locally hosted php server with a locally hosted database.
